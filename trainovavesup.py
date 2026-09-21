@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-OVAVE baseline 训练脚本（标准 AVE segment 评估口径）
-- 准确率：10 段全参与 + is_event + 类别，背景类 index=67
-- OV-AVEL 四类指标（Acc/Seg/Eve/Avg）对齐官方 eval_metrics.py
-- 原版 OVOVE 口径备份见 trainovavesup_ovave_metric.py
-"""
 import os
 import time
 import random
