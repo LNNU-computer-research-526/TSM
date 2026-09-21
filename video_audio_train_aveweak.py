@@ -1,12 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-AVE 弱监督：伪标签训练 + GT 测试
-  - 训练: 帧级 segment_pseudo_labels（loss / train acc / GNN）
-  - 测试: labels.h5 帧级 GT segment accuracy
-
-备份:
-  - 伪标签自评原版: video_audio_train_aveweak_orig_pseudosup.py
-"""
 import json
 import os
 import random
@@ -97,26 +89,6 @@ def compose_train_loss(loss_is_event, loss_event_class, kl_loss, gnn_loss,
     if args.use_loss_st:
         loss = loss + gnn_loss
     return loss
-
-
-def write_train_summary(extra=None):
-    payload = {
-        'loss_combo': loss_combo_name(args),
-        'best_acc': float(best_accuracy),
-        'best_epoch': int(best_accuracy_epoch),
-        'snapshot_pref': args.snapshot_pref,
-        'use_loss_kl': bool(args.use_loss_kl),
-        'use_loss_even': bool(args.use_loss_even),
-        'use_loss_va': bool(args.use_loss_va),
-        'use_loss_class': bool(args.use_loss_class),
-        'use_loss_st': bool(args.use_loss_st),
-        'enable_gnn': bool(args.enable_gnn),
-    }
-    if extra:
-        payload.update(extra)
-    path = os.path.join(args.snapshot_pref, 'train_summary.json')
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
 
 
 def main():
