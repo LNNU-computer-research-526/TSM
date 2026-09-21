@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""AVE 完全监督：训练与评测均使用 labels.h5 帧级 GT。
-
-数据划分使用官方 train_order.h5 / test_order.h5（不再用 Train.txt/Test.txt）。
-旧版重叠划分备份：video_audio_train_sup_overlap.py
-"""
 import os
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -79,16 +74,7 @@ def count_parameters(model, prefix=""):
 
 # ================================= 新增：保存标签结果函数（增加视频名称） ============================
 def save_prediction_labels(epoch, sample_idx, video_name, pred_labels, true_labels, split="test"):
-    """
-    保存预测标签和真实标签到指定路径（包含视频名称）
-    Args:
-        epoch: 当前轮次
-        sample_idx: 样本索引
-        video_name: 视频文件名（如 "video_123.mp4"）
-        pred_labels: 预测标签列表 [T,] (int类型)
-        true_labels: 真实标签列表 [T,] (int类型)
-        split: 数据集划分（train/test）
-    """
+   
     # 创建轮次文件夹
     epoch_dir = os.path.join(RESULT_SAVE_PATH, split, f"epoch_{epoch}")
     os.makedirs(epoch_dir, exist_ok=True)
